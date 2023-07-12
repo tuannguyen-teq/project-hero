@@ -7,19 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-
 @module
 abstract class RegisterModule {
   @preResolve
   @singleton
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 
-  // @lazySingleton
-  // StorageData get storageData => GetIt.instance<LocalDataManager>();
-
   @lazySingleton
-  GoogleSignIn get googleSignIn => GoogleSignIn(
-      scopes: ['https://www.googleapis.com/auth/userinfo.email']
-  );
+  GoogleSignIn get googleSignIn =>
+      GoogleSignIn(scopes: ['https://www.googleapis.com/auth/userinfo.email']);
 }
-

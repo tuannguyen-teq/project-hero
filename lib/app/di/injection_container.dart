@@ -9,8 +9,13 @@ final sl = GetIt.instance;
   initializerName: r'$initGetIt', // default
   preferRelativeImports: true, // default
   asExtension: false, // default
+  ignoreUnregisteredTypes: [
+    // Todo: add Repository
+
+  ],
+
 )
-Future injectContainerInit() async {
-  $initGetIt($initGetItFromData(sl) as GetIt);
-  await sl.allReady();
+Future<void> injectContainerInit() async {
+  $initGetIt(await $initGetItFromData(sl));
+  await sl.allReady(timeout: const Duration(seconds: 5), ignorePendingAsyncCreation: true);
 }
