@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,15 +6,17 @@ import '../../firebase_options.dart';
 
 import '../../app/di/injection_container.dart';
 import '../app/bloc_observer.dart';
+import 'package:common/common.dart';
 
 void loadApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: 'TeqHero',
+    name: currentEnvironment == Environment.DEV ? 'TeqHero-dev' : 'TeqHero',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   await injectContainerInit();
   Bloc.observer = SimpleBlocObserve();
 
