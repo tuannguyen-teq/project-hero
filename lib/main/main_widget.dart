@@ -9,7 +9,6 @@ import '../app/bloc_observer.dart';
 import 'package:common/common.dart';
 
 void loadApp() async {
-  print('=====currentEnvironment : $currentEnvironment');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     name: currentEnvironment == Environment.DEV ? 'TeqHero-dev' : 'TeqHero',
