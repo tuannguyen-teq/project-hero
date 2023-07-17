@@ -75,7 +75,6 @@ android {
             dimension "flavors"
             applicationIdSuffix ".dev"
             resValue "string", "app_name", "Project Review Dev"
-            versionNameSuffix ".dev"
             signingConfig signingConfigs.debug
 
         }
