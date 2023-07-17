@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../firebase_options.dart';
+import '../../firebase_options_dev.dart' as fb_dev;
+import '../../firebase_options_prod.dart' as fb_prod;
 
 import '../../app/di/injection_container.dart';
 import '../app/bloc_observer.dart';
@@ -11,8 +12,10 @@ import 'package:common/common.dart';
 void loadApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: currentEnvironment == Environment.DEV ? 'TeqHero-dev' : 'TeqHero',
-    options: DefaultFirebaseOptions.currentPlatform,
+    name: currentEnvironment == Environment.DEV ? 'TeqHero-Dev' : 'TeqHero',
+    options: currentEnvironment == Environment.DEV
+        ? fb_dev.DefaultFirebaseOptions.currentPlatform
+        : fb_prod.DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(

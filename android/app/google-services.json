@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "502651578807",
-    "project_id": "project-hero-by-me",
-    "storage_bucket": "project-hero-by-me.appspot.com"
+    "project_number": "704290384305",
+    "project_id": "preview-hero-prod",
+    "storage_bucket": "preview-hero-prod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:502651578807:android:3dd686fc9bb82fea52e032",
+        "mobilesdk_app_id": "1:704290384305:android:d5447fe508233b0c1af590",
         "android_client_info": {
           "package_name": "com.example.project_review"
         }
       },
       "oauth_client": [
         {
-          "client_id": "502651578807-6te1l982q9hnt5k6ai4khciv70b3i1mg.apps.googleusercontent.com",
+          "client_id": "704290384305-7eseti3eu5g5qlqapgnqontuhjrkiamt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIkoKB41dURowlLLym8dMwdOnHVsZtJSg"
+          "current_key": "AIzaSyDtUynD2ejdIguapIHAdzlW-GsM-WL7_5c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "502651578807-6te1l982q9hnt5k6ai4khciv70b3i1mg.apps.googleusercontent.com",
+              "client_id": "704290384305-7eseti3eu5g5qlqapgnqontuhjrkiamt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
