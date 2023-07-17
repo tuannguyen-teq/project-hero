@@ -47,21 +47,51 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.project_review"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            keyAlias 'developmentkey'
+            keyPassword '123456'
+            storeFile file('src/keystore/developmentkey.jks')
+            storePassword '123456'
+        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            keyAlias 'productionkey'
+            keyPassword '123456789'
+            storeFile file('src/keystore/productionkey.jks')
+            storePassword '123456789'
+        }
+    }
+
+    flavorDimensions "flavors"
+    productFlavors {
+        dev {
+            dimension "flavors"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Project Review Dev"
             signingConfig signingConfigs.debug
+
+        }
+        prod {
+            dimension "flavors"
+            resValue "string", "app_name", "Project Review"
+            signingConfig signingConfigs.release
+    }
+}
+
+    buildTypes {
+        debug {
+            debuggable true
+            signingConfig null
+        }
+        release {
+            debuggable false
         }
     }
 }
