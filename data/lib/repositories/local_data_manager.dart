@@ -34,8 +34,9 @@ class LocalDataRepositoryImpl implements LocalDataRepository {
   }
 
   @override
-  Future<void> saveAccessToken(String? accessToken) {
-    // TODO: implement saveAccessToken
-    throw UnimplementedError();
+  Future<void> saveAccessToken(String? accessToken) async {
+    if (accessToken != null) {
+      sharedPreferences.setString(tokenKey, accessToken);
+    }
   }
 }
