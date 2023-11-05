@@ -15,7 +15,7 @@ import 'package:google_sign_in/google_sign_in.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
 
-import '../repositories/local_data_manager.dart' as _i6;
+import '../repositories/local_data_manager_impl.dart' as _i6;
 import 'injection_container.dart' as _i7;
 
 // ignore_for_file: unnecessary_lambdas

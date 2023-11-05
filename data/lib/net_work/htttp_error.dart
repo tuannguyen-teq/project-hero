@@ -18,6 +18,7 @@ class HttpError implements Exception {
     defaultError = 'Server error, please try again!!!',
   }) {
     String message = defaultError;
+    // ignore: deprecated_member_use
     if (e is DioError && e.response != null) {
       Map? data = e.response != null ? e.response!.data : null;
 

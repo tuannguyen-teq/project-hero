@@ -57,6 +57,7 @@ class NetWorkCustom {
 
 void setupCertificate(HttpClientAdapter clientAdapter, String pemFilePath) async {
   var data = await rootBundle.load(pemFilePath);
+  // ignore: deprecated_member_use
   (clientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
     SecurityContext sc = SecurityContext();
     sc.setTrustedCertificatesBytes(data.buffer.asUint8List());

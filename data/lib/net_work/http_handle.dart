@@ -5,7 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:data/net_work/htttp_error.dart';
 import 'package:data/net_work/net_work_custom.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class HttpAPI {
   final HttpError httpError;
@@ -61,7 +61,9 @@ abstract class HttpAPI {
       final result = await Connectivity().checkConnectivity();
       return result != ConnectivityResult.none;
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return false;
     }
   }
