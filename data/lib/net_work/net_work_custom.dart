@@ -1,9 +1,9 @@
 import 'dart:io';
-
-import 'package:data/net_work/htttp_error.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/services.dart';
+
+import 'htttp_error.dart';
 
 class NetWorkCustom {
   static Dio? _dio;

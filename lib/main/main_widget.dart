@@ -17,14 +17,16 @@ void loadApp() async {
         ? fb_dev.DefaultFirebaseOptions.currentPlatform
         : fb_prod.DefaultFirebaseOptions.currentPlatform,
   );
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   await injectContainerInit();
+  // await preloadImageApp();
+
   Bloc.observer = SimpleBlocObserve();
 
   runApp(const MaterialApp(home: MainWidget()));
-  // await preloadImageApp();
 }
 
 class MainWidget extends StatelessWidget {

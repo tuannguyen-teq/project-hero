@@ -1,18 +1,18 @@
 import 'package:injectable/injectable.dart';
 
-class BaseUrl {
+class DefaultBaseUrl {
   final String? environment;
 
-  BaseUrl(this.environment);
+  DefaultBaseUrl(this.environment);
 
   String get url {
     switch (environment) {
       case Environment.dev:
-        return '';
+        return 'http://hero.dev.teqn.asia/';
       case Environment.prod:
-        return '';
+        return 'http://hero.dev.teqn.asia/';
       default:
-        return '';
+        return 'http://hero.dev.teqn.asia/';
     }
   }
 }
