@@ -11,16 +11,11 @@ class GraphqlRepositoryImpl extends GraphQlApi implements GraphqlRepository {
       : super(tHeroNetwork.dio, httpError);
 
   @override
-  Future<UserInfo> loginWithGoogle(
-    String? email,
-    String? fullName,
-    String? idToken,
-  ) async {
+  Future<User> loginWithGoogle(UserParam param) async {
+    final request = UserRequest.fromParam(param).toMap();
     final signIn = '''mutation {
         signIn(input: {
-          email: "$email",
-          fullName: "$fullName",
-          idToken: "$idToken",
+         $request
         }) {
           user {
             id
@@ -37,10 +32,9 @@ class GraphqlRepositoryImpl extends GraphQlApi implements GraphqlRepository {
         }
       }''';
     final response = await postRequest(signIn);
-    return UserInfo();
-    //  BaseResponseDto.fromMap(response, (json) => UserInfoDto.fromMap(json['signIn']))
-    //     .data
-    //     .toDomain();
+    return BaseResponseDto.fromMap(response, (json) => UserDto.fromMap(json['signIn']))
+        .data
+        .toDomain;
   }
 
   @override

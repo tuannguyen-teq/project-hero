@@ -1,6 +1,9 @@
 export './environment/base_url.dart';
 export './environment/environment.dart';
 export './app_log/custom_log.dart';
-export './resources/resources.dart';
-
-
+export './untils/const.dart';
+export './untils/enum.dart';
+export './untils/resources/app_colors.dart';
+export './untils/resources/app_images.dart';
+export './untils/resources/app_strings.dart';
+export './untils/resources/rive_resources.dart';

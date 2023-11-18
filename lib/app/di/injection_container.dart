@@ -6,11 +6,12 @@ import 'injection_container.config.dart';
 final sl = GetIt.instance;
 
 @InjectableInit(
-  initializerName: r'$initGetIt', // default
-  preferRelativeImports: true, // default
-  asExtension: false, // default
+  initializerName: r'$initGetIt',
+  preferRelativeImports: true,
+  asExtension: false,
 )
 Future<void> injectContainerInit() async {
-  $initGetIt(await $initGetItFromData(sl));
-  await sl.allReady(timeout: const Duration(seconds: 5), ignorePendingAsyncCreation: true);
+  final getItFromData = await $initGetItFromData(sl);
+  $initGetIt(getItFromData);
+  await sl.allReady();
 }

@@ -1,5 +1,5 @@
 import 'package:common/common.dart';
-import 'package:common/environment/const.dart';
+
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 
@@ -7,6 +7,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import '../common.dart';
+
+const timeOut = Duration(seconds: 10);
 
 @singleton
 class THeroNetwork {
@@ -18,7 +20,7 @@ class THeroNetwork {
     BaseOptions options = BaseOptions(
       connectTimeout: timeOut,
       receiveTimeout: timeOut,
-      baseUrl: baseUrl.url,
+      baseUrl: baseUrl.getUrl(),
     );
 
     Dio dio = Dio(options);
@@ -51,9 +53,12 @@ class THeroNetwork {
   }
 
   DioError? checkErrorExisted(dynamic response, RequestOptions options) {
-    if (response is Map && response.containsKey('errors') && response['errors'] is List) {
-      final error = (response['errors'] as List<dynamic>).first['message'];
-      return DioError(requestOptions: options, error: HttpError(message: error));
+    if (response is Map && response['errors'] is List) {
+      final errors = response['errors'] as List<dynamic>;
+      if (errors.isNotEmpty) {
+        final error = errors.first['message'];
+        return DioError(requestOptions: options, error: HttpError(message: error));
+      }
     }
     return null;
   }
@@ -68,7 +73,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     try {
       final accessToken = GetIt.instance<LocalDataRepository>().accessToken;
-      final refreshToken = GetIt.instance<LocalDataRepository>().refreshToken;
+      // final refreshToken = GetIt.instance<LocalDataRepository>().refreshToken;
       var requestOptions = response.requestOptions;
       if (accessToken != requestOptions.headers['THero-Token']) {
         //Token updated

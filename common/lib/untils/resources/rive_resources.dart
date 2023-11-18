@@ -1,5 +1,3 @@
-part of 'resources.dart';
-
 class RiveResources {
   RiveResources._();
 

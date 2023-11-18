@@ -1,18 +1,19 @@
+import 'package:common/common.dart';
 import 'package:injectable/injectable.dart';
 
-class DefaultBaseUrl {
-  final String? environment;
+abstract class BaseUrl extends BaseEnvironmentData<String> {
+  String getUrl() => getData();
+  String? get getPemFilePath => null;
+}
 
-  DefaultBaseUrl(this.environment);
+@singleton
+class DefaultBaseUrl extends BaseUrl {
+  @override
+  String dev() => 'http://hero.dev.teqn.asia/';
 
-  String get url {
-    switch (environment) {
-      case Environment.dev:
-        return 'http://hero.dev.teqn.asia/';
-      case Environment.prod:
-        return 'http://hero.dev.teqn.asia/';
-      default:
-        return 'http://hero.dev.teqn.asia/';
-    }
-  }
+  @override
+  String stg() => 'http://hero.dev.teqn.asia/';
+
+  @override
+  String prod() => 'https://hero.teqn.asia/';
 }

@@ -3,7 +3,7 @@ import 'dart:async';
 import '../domain.dart';
 
 abstract class GraphqlRepository {
-  Future<UserInfo> loginWithGoogle(String? email, String? fullName, String? idToken);
+  Future<User> loginWithGoogle(UserParam param);
 
   // Future<Result> logOut(String? refreshToken);
 
