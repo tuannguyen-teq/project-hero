@@ -1,8 +1,6 @@
 import 'package:common/app_log/custom_log.dart';
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
-@singleton
 class HttpInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {

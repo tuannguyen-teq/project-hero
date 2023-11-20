@@ -3,18 +3,18 @@ import 'package:domain/domain.dart';
 class UserRequest {
   final String idToken;
   final String fullName;
-  final String userName;
+  final String email;
   UserRequest({
     required this.idToken,
     required this.fullName,
-    required this.userName,
+    required this.email,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'idToken': idToken,
       'fullName': fullName,
-      'userName': userName,
+      'email': email,
     };
   }
 
@@ -22,7 +22,7 @@ class UserRequest {
     return UserRequest(
       idToken: param.idToken,
       fullName: param.fullName,
-      userName: param.userName,
+      email: param.emai,
     );
   }
 }

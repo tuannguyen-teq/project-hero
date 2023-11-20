@@ -1,10 +1,8 @@
+import 'package:data/config/base_api.dart';
 import 'package:dio/dio.dart';
 
-import '../common.dart';
-
-abstract class GraphQlApi extends HttpAPI {
-  Dio dio;
-  GraphQlApi(this.dio, HttpError httpError) : super(dio, httpError);
+abstract class GraphQlApi extends BaseAPI {
+  GraphQlApi(super.dio, super.httpError);
 
   Future<Map<String, dynamic>> postRequest(String query,
       {Map<String, dynamic>? queryParameters}) async {

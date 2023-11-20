@@ -1,6 +1,8 @@
 import 'dart:async';
 
+
 import 'package:domain/domain.dart';
+import 'package:domain/repositories/graphql_repository.dart';
 import 'package:injectable/injectable.dart';
 
 import '../common.dart';

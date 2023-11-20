@@ -1,10 +1,10 @@
 class UserParam {
-  final String idToken;
+  final String emai;
   final String fullName;
-  final String userName;
+  final String idToken;
   UserParam({
-    required this.idToken,
+    required this.emai,
     required this.fullName,
-    required this.userName,
+    required this.idToken,
   });
 }

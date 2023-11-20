@@ -1,7 +1,8 @@
 import 'package:common/common.dart';
 
 import 'package:dio/dio.dart';
-import 'package:domain/domain.dart';
+import 'package:domain/repositories/graphql_repository.dart';
+import 'package:domain/repositories/local_data_repository.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
