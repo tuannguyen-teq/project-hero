@@ -1,13 +1,9 @@
-
 import 'package:common/common.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 import 'dart:async';
-
-import 'package:flutter_svg/flutter_svg.dart';
 
 Gradient getRadialGradient() {
   return const RadialGradient(

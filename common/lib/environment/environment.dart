@@ -13,7 +13,7 @@ abstract class BaseEnvironmentData<D> {
 
   D prod();
 
-  D getData() {
+  D get  getData {
     switch (currentEnvironment) {
       case Environment.DEV:
         return dev();

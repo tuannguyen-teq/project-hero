@@ -41,7 +41,9 @@ class LoginWidget extends StatelessWidget {
                     Positioned(
                       top: width * 0.065,
                       child: HighLight(
-                        onTap: () {},
+                        onTap: () {
+                          bloc.add(const LoginEvent());
+                        },
                         child: SizedBox(
                           height: height * 0.07,
                           width: width * 0.58,

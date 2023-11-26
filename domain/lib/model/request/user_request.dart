@@ -10,14 +10,6 @@ class UserRequest {
     required this.email,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'idToken': idToken,
-      'fullName': fullName,
-      'email': email,
-    };
-  }
-
   factory UserRequest.fromParam(UserParam param) {
     return UserRequest(
       idToken: param.idToken,
@@ -25,4 +17,6 @@ class UserRequest {
       email: param.emai,
     );
   }
+@override
+  String toString() => 'idToken: $idToken, fullName: $fullName, email: $email';
 }

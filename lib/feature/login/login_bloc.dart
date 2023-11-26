@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:common/common.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/repositories/graphql_repository.dart';
 import 'package:domain/repositories/local_data_repository.dart';
@@ -26,17 +27,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       if (userGoogle != null && tokenResult != null) {
         emit(state.copyWith(isLoading: true));
-
-        final data = await graphqlRepository.loginWithGoogle(UserParam(
+        final data = await graphqlRepository.loginWithGoogle(
+          UserParam(
             emai: userGoogle.email,
             fullName: userGoogle.displayName!,
-            idToken: tokenResult.idToken!));
-        // localDataRepository.saveAccessToken(data.accessToken);
-        // localDataRepository.saveRefreshToken(data.refreshToken);
-        // localDataRepository.saveUser(data.user);
-        // final initialize = await graphqlRepository.init();
-        // localDataRepository.saveInitialize(initialize);
-        // emit(state.copyWith(isLoading: false, navigator: AppStatus.loggedIn));
+            idToken: tokenResult.idToken!,
+          ),
+          
+        );
       }
     });
   }

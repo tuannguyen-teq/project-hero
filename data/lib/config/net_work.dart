@@ -21,7 +21,7 @@ class THeroNetwork {
     BaseOptions options = BaseOptions(
       connectTimeout: timeOut,
       receiveTimeout: timeOut,
-      baseUrl: baseUrl.getUrl(),
+      baseUrl: baseUrl.url,
     );
 
     Dio dio = Dio(options);

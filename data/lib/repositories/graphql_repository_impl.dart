@@ -14,7 +14,7 @@ class GraphqlRepositoryImpl extends GraphQlApi implements GraphqlRepository {
 
   @override
   Future<User> loginWithGoogle(UserParam param) async {
-    final request = UserRequest.fromParam(param).toMap();
+    final request = UserRequest.fromParam(param).toString();
     final signIn = '''mutation {
         signIn(input: {
          $request
