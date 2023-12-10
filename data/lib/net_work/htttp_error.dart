@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class HttpError implements Exception {
-  static const int CODE_NO_INTERNET = 10001;
+  static const int codeNoInternet = 10001;
   final int? code;
 
   final String message;
@@ -35,7 +35,7 @@ class HttpError implements Exception {
   }
 
   void withOutInternet({noInternetError = 'No Internet!'}) {
-    throw HttpError(code: CODE_NO_INTERNET, message: noInternetError);
+    throw HttpError(code: codeNoInternet, message: noInternetError);
   }
 
   @override

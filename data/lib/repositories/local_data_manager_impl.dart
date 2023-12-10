@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:domain/repositories/local_data_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

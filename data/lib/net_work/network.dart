@@ -1,11 +1,11 @@
 import 'dart:io';
-
-import 'package:data/net_work/htttp_error.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/services.dart';
 
-class NetWorkCustom {
+import 'htttp_error.dart';
+
+class NetWork {
   static Dio? _dio;
   static List<Interceptor>? _interceptors;
   static late HttpError httpError;
@@ -19,7 +19,7 @@ class NetWorkCustom {
   }) {
     _interceptors = interceptors;
     _defaultOptions = options;
-    NetWorkCustom.httpError = httpError;
+    NetWork.httpError = httpError;
     getDioDefault();
     if (pemFilePath != null) {
       setupCertificate(_dio!.httpClientAdapter, pemFilePath);
@@ -35,8 +35,8 @@ class NetWorkCustom {
     BaseOptions options;
     if (baseUrl != null) {
       options = BaseOptions(
-        connectTimeout: const Duration(milliseconds: 10000),
-        receiveTimeout: const Duration(milliseconds: 10000),
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
         baseUrl: baseUrl,
       );
     } else {

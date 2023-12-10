@@ -1,11 +1,11 @@
 import 'dart:core';
 
-import 'package:common/common.dart';
+import 'package:common/environment/base_url.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:data/net_work/htttp_error.dart';
-import 'package:data/net_work/net_work_custom.dart';
+import 'package:data/net_work/network.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+
+import 'htttp_error.dart';
 
 abstract class HttpAPI {
   final HttpError httpError;
@@ -21,9 +21,9 @@ abstract class HttpAPI {
 
     String? pemFilePath;
     if (baseUrl() == null) {
-      _dio = NetWorkCustom.getDioDefault();
+      _dio = NetWork.getDioDefault();
     } else {
-      _dio = NetWorkCustom.getBaseDio(baseUrl: baseUrl()!.getUrl());
+      _dio = NetWork.getBaseDio(baseUrl: baseUrl()!.url);
       pemFilePath = baseUrl()?.getPemFilePath;
     }
     if (pemFilePath != null) {
@@ -32,21 +32,38 @@ abstract class HttpAPI {
     return _dio!;
   }
 
-  @protected
+  Future<Map<String, dynamic>> postRequest(String query,
+      {Map<String, dynamic>? queryParameters,}) async {
+    final response = await _dio?.post(
+      'graphql/',
+      data: {'query': query},
+      queryParameters: queryParameters,
+    );
+    return response?.data;
+  }
+
+  Future<Map<String, dynamic>> postRequestWithFile(FormData formData) async {
+    final response = await _dio?.post('graphql/',
+        data: formData, options: Options(headers: {"Content-Type": "multipart/form-data"},));
+    return response?.data;
+  }
+
   Future sendApiRequest(
     Method method, {
     Map<String, String>? headers,
     dynamic body,
     Map<String, dynamic> queryParameters = const {},
+    Options? options,
   }) async {
     bool haveConnection = await _connectedWithInternet();
     if (!haveConnection) httpError.withOutInternet();
-    final request = HttpRequest.newRequest(
+    var request = HttpRequest.newRequest(
       method,
       dio: await getDio(),
       body: body,
       queryParameters: queryParameters,
       headers: headers,
+      options: options,
     );
     try {
       Response rawResponse = await request.send();
@@ -61,9 +78,7 @@ abstract class HttpAPI {
       final result = await Connectivity().checkConnectivity();
       return result != ConnectivityResult.none;
     } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      print(e);
       return false;
     }
   }
@@ -72,7 +87,7 @@ abstract class HttpAPI {
 class HttpRequest {
   final Method method;
   Map<String, dynamic>? headers;
-  dynamic body;
+  var body;
   Map<String, dynamic> queryParameters;
   Dio dio;
   Options? options;
@@ -84,24 +99,18 @@ class HttpRequest {
     this.body,
     this.queryParameters = const {},
     this.options,
-  }) : dio = dio ?? NetWorkCustom.getDioDefault();
+  }) : dio = dio ?? NetWork.getDioDefault();
 
   factory HttpRequest.newRequest(
     Method method, {
     Dio? dio,
     Map<String, String>? headers,
-    final dynamic body,
+    var body,
     Map<String, dynamic> queryParameters = const {},
     Options? options,
   }) {
-    return HttpRequest(
-      method,
-      dio: dio,
-      headers: headers,
-      body: body,
-      queryParameters: queryParameters,
-      options: options,
-    );
+    return HttpRequest(method,
+        dio: dio, headers: headers, body: body, queryParameters: queryParameters, options: options);
   }
 
   void addQueries(Map<String, dynamic> queryParameters) => this.queryParameters = queryParameters;
@@ -144,6 +153,8 @@ abstract class Method {
   String path;
 
   Method(this.path);
+
+  //String get path => _path;
 
   void setPath(String key, String value) {
     path = path.replaceAll(key, value);

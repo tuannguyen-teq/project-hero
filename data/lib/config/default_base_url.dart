@@ -1,18 +1,14 @@
+import 'package:common/common.dart';
 import 'package:injectable/injectable.dart';
 
-class BaseUrl {
-  final String? environment;
+@singleton
+class DefaultBaseUrl extends BaseUrl {
+  @override
+  String dev() => 'http://hero.dev.teqn.asia/';
 
-  BaseUrl(this.environment);
+  @override
+  String stg() => 'http://hero.dev.teqn.asia/';
 
-  String get url {
-    switch (environment) {
-      case Environment.dev:
-        return '';
-      case Environment.prod:
-        return '';
-      default:
-        return '';
-    }
-  }
+  @override
+  String prod() => 'https://hero.teqn.asia/';
 }

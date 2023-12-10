@@ -9,6 +9,8 @@ import '../../app/di/injection_container.dart';
 import '../app/bloc_observer.dart';
 import 'package:common/common.dart';
 
+import '../feature/login/login_widget.dart';
+
 void loadApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -17,14 +19,15 @@ void loadApp() async {
         ? fb_dev.DefaultFirebaseOptions.currentPlatform
         : fb_prod.DefaultFirebaseOptions.currentPlatform,
   );
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   await injectContainerInit();
+
   Bloc.observer = SimpleBlocObserve();
 
-  runApp(const MaterialApp(home: MainWidget()));
-  // await preloadImageApp();
+  runApp(const MaterialApp(home: LoginWidget()));
 }
 
 class MainWidget extends StatelessWidget {
@@ -32,10 +35,9 @@ class MainWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: const Text('HELLO WORLD'),
+    return const Scaffold(
+      body: Center(
+        child: LoginWidget(),
       ),
     );
   }
