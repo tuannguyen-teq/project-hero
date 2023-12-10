@@ -28,7 +28,7 @@ class THeroNetwork {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         final token = GetIt.instance<LocalDataRepository>().accessToken;
-        if (token.isNotEmpty == true) {
+        if (token.isNotEmpty) {
           options.headers['THero-Token'] = token;
         }
         handler.next(options);
@@ -37,11 +37,13 @@ class THeroNetwork {
         final error = checkErrorExisted(response.data, response.requestOptions);
         if (error == null) {
           handler.resolve(response);
+          print('respone: $response');
         } else {
           if (error.message == AppStrings.expired) {
             handler.next(response);
           } else {
             handler.reject(error);
+            print('respone: ${error.message}');
           }
         }
       },
